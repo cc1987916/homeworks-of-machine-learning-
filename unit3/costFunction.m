@@ -19,7 +19,10 @@ grad = zeros(size(theta));
 %
 % Note: grad should have the same dimensions as theta
 %
-
+hypo = sigmoid(X * theta);
+J =( -1/m).*(y' * log(hypo) + (1 .- y)'*log(1 .- hypo));
+Error = hypo - y;
+grad = 1/m .* (X' * Error);
 
 
 
