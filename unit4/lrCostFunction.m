@@ -39,6 +39,8 @@ grad = zeros(size(theta));
 %theta = ones(size(X,2),1);
 %lambda = 0.01;
  
+hypo = sigmoid(X * theta);
+J = -1/m.*(y'*log(hypo)+(1 .- y)'*log(1.-hypo));
 
 
 
