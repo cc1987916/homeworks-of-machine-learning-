@@ -30,6 +30,10 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+pred = all_theta * X';
+[val,ind] = max(pred, [], 1);
+p = ind';
+
 
 
 
