@@ -46,7 +46,7 @@ X = [ones(m,1) X];
 net_h = X*Theta1';
 out_h = sigmoid(net_h);
 
-out_h = [ones(m,1) out_h];
+out_h = [ones(m,1) out_h];%维度为5000*26
 net_o = out_h*Theta2';
 out_o = sigmoid(net_o);
 
@@ -72,19 +72,21 @@ J = -1/m*sum((y'*log(out_o)) + (1-y)'*log(1-out_o));
 %               over the training examples if you are implementing it for the 
 %               first time.
 %
-%将y向量做成一个矩阵，5000*10，
-new_y = zeros(m,num_labels)
-for i =1:10,
-new_y(:,i) = (y==i);
+%
+err_term_o = zeros(m,num_labels)%维度为5000*10
+for i =1:num_labels,
+err_term_o(:,i) = out_o(:,i) - (y==i);
 end;
-
-err_term_o = new_y - out_o; %维度为5000*10
+err_term_o = err_term_o .*out_o.*(1-out_o);
 err_term_h = (err_term_o*Theta2).*out_h.*(1-out_h);%维度为5000*26
 
-Theta2_grad = err_term_o'*out_h;
+Theta2_grad = err_term_o'*out_h;%out_h维度为5000*26
 
-Theta1_grad = err_term_h'*X
+Theta1_grad = err_term_h'*X;
 
+disp(Theta2_grad);
+
+disp(Theta1_grad);
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
