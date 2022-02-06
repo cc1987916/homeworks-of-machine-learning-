@@ -77,12 +77,13 @@ err_term_o = zeros(m,num_labels)%维度为5000*10
 for i =1:num_labels,
 err_term_o(:,i) = out_o(:,i) - (y==i);
 end;
-err_term_o = err_term_o .*out_o.*(1-out_o);
+%err_term_o = err_term_o .*out_o.*(1-out_o);
 err_term_h = (err_term_o*Theta2).*out_h.*(1-out_h);%维度为5000*26
 
-Theta2_grad = err_term_o'*out_h;%out_h维度为5000*26
+Theta2_grad = err_term_o'*out_h;%out_h维度为5000*26  Theta2_grad维度为10*26
 
-Theta1_grad = err_term_h'*X;
+%前向传播时候加了bias unit，反向传播时候，去掉第一列
+Theta1_grad = err_term_h(:,2:end)'*X;%Theta1_grad维度为25*401
 
 disp(Theta2_grad);
 
@@ -94,20 +95,12 @@ disp(Theta1_grad);
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+Theta2_reg = Theta2_grad(:,2:end) + lambda.*Theta2(:,2:end);
+Theta2_grad = 1/m.*[Theta2_grad(:,1) Theta2_reg];
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1_reg = Theta1_grad(:,2:end) + lambda.*Theta1(:,2:end);
+Theta1_grad = 1/m.*[Theta1_grad(:,1) Theta1_reg];
 
 
 
