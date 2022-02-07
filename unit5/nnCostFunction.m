@@ -48,7 +48,7 @@ out_h = sigmoid(net_h);
 
 out_h = [ones(m,1) out_h];%维度为5000*26
 net_o = out_h*Theta2';
-out_o = sigmoid(net_o);
+out_o = sigmoid(net_o);%维度为5000*10
 
 %说明，out_0是一个5000*10维度的矩阵，y是5000*1，为什么用sum求和，原因是前面两项得出的是个向量。
 %J = (-1/m).*sum((y'*log(out_o)) + (1-y)'*log(1-out_o));
