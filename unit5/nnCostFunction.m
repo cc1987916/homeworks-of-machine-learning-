@@ -105,7 +105,12 @@ Theta2_grad = 1/m.*[Theta2_grad(:,1) Theta2_reg];
 Theta1_reg = Theta1_grad(:,2:end) + lambda.*Theta1(:,2:end);
 Theta1_grad = 1/m.*[Theta1_grad(:,1) Theta1_reg];
 
+%加上正则项后的代价函数J
+reg1 = sum(sum((Theta1(:,2:end)).^2));
+reg2 = sum(sum((Theta2(:,2:end)).^2));
 
+reg = lambda/(2*m)*(reg1 + reg2);
+J = J + reg;
 
 
 
