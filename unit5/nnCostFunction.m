@@ -51,9 +51,12 @@ net_o = out_h*Theta2';
 out_o = sigmoid(net_o);
 
 %说明，out_0是一个5000*10维度的矩阵，y是5000*1，为什么用sum求和，原因是前面两项得出的是个向量。
-J = -1/m*sum((y'*log(out_o)) + (1-y)'*log(1-out_o));
-
-
+%J = (-1/m).*sum((y'*log(out_o)) + (1-y)'*log(1-out_o));
+for i = 1:num_labels,
+  matrices_y(:,i) = (y==i);
+end;
+matr_J = log(out_o).*matrices_y + log((1-out_o)).*(1-matrices_y);
+J = (-1/m)*sum(sum(matr_J));
 
 
 %
@@ -73,17 +76,17 @@ J = -1/m*sum((y'*log(out_o)) + (1-y)'*log(1-out_o));
 %               first time.
 %
 %
-err_term_o = zeros(m,num_labels)%维度为5000*10
+err_termOut = zeros(m,num_labels);   
 for i =1:num_labels,
-err_term_o(:,i) = out_o(:,i) - (y==i);
+err_termOut(:,i) = out_o(:,i) - (y==i);
 end;
 %err_term_o = err_term_o .*out_o.*(1-out_o);
-err_term_h = (err_term_o*Theta2).*out_h.*(1-out_h);%维度为5000*26
+err_termH = (err_termOut*Theta2).*out_h.*(1-out_h);%维度为5000*26
 
-Theta2_grad = err_term_o'*out_h;%out_h维度为5000*26  Theta2_grad维度为10*26
+Theta2_grad = err_termOut'*out_h;%out_h维度为5000*26  Theta2_grad维度为10*26
 
 %前向传播时候加了bias unit，反向传播时候，去掉第一列
-Theta1_grad = err_term_h(:,2:end)'*X;%Theta1_grad维度为25*401
+Theta1_grad = err_termH(:,2:end)'*X;%Theta1_grad维度为25*401
 
 disp(Theta2_grad);
 
