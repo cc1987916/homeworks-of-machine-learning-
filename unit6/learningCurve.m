@@ -53,7 +53,19 @@ error_val   = zeros(m, 1);
 
 % ---------------------- Sample Solution ----------------------
 
-
+for i = 1:m,
+%首先，取样本集中第一个样本，带入trainLinearReg这个函数中，这个函数会迭代200次，给出一个
+%关于样本1的最优theta；
+  theta = trainLinearReg(X(1:i, :), y(1:i,:), lambda);
+%然后利用linearRegCostFunction函数，同时设置lambda为0，计算上面最优theta
+%且不包含正则项情况下，样本1的代价函数值error_train(1)
+  [error_train(i) grad_train] = linearRegCostFunction(X(1:i, :), y(1:i,:), 
+  theta, 0);
+%然后利用linearRegCostFunction函数，同时设置lambda为0，计算该最优theta
+%且不包含正则项情况下，cross validation set 的代价函数值error_val(1)
+  [error_val(i) grad_val] = linearRegCostFunction(Xval, yval, theta, 0);
+end;
+%第二次循环，样本集的样本增加一个，新的样本集包含样本1和样本2；
 
 
 
