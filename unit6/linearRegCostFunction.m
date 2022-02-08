@@ -18,10 +18,14 @@ grad = zeros(size(theta));
 %
 %               You should set J to the cost and grad to the gradient.
 %
+hypo = X*theta;
+Matr_Err = 1/2.*(hypo - y).^2;
+reg = 1/2.*theta(2).^2
+J = (1/m)*(sum(sum(Matr_Err)) + lambda*sum(reg));
 
-
-
-
+grad = X'*(hypo - y);
+grad_reg = grad(2) + lambda.*theta(2);
+grad = (1/m)*[grad(1) grad_reg];
 
 
 
