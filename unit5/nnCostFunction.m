@@ -80,7 +80,10 @@ err_termOut = zeros(m,num_labels);
 for i =1:num_labels,
 err_termOut(:,i) = out_o(:,i) - (y==i);
 end;
-%err_term_o = err_term_o .*out_o.*(1-out_o);
+
+%err_termOut = out_o - matrices_y
+
+
 err_termH = (err_termOut*Theta2).*out_h.*(1-out_h);%维度为5000*26
 
 Theta2_grad = err_termOut'*out_h;%out_h维度为5000*26  Theta2_grad维度为10*26
