@@ -57,7 +57,7 @@ if strcmp(func2str(kernelFunction), 'linearKernel')
 elseif strfind(func2str(kernelFunction), 'gaussianKernel')
     % Vectorized RBF Kernel
     % This is equivalent to computing the kernel on every pair of examples
-    X2 = sum(X.^2, 2);
+    X2 = sum(X.^2, 2);%X2会变成一个列向量
     K = bsxfun(@plus, X2, bsxfun(@plus, X2', - 2 * (X * X')));
     K = kernelFunction(1, 0) .^ K;
 else
