@@ -24,8 +24,12 @@ centroids = zeros(K, n);
 %               centroid i.
 %
 % Note: You can use a for-loop over the centroids to compute this.
-%
 
+%idx是一个m*1维度的向量，
+for i = 1:K,
+  cluster_matr = X(idx==i,:);
+  centroids(i,:) = mean(cluster_matr);
+endfor;
 
 
 

@@ -20,9 +20,15 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
-
-
-
+%centroids是一个k*n维度的矩阵
+m = size(X, 1);
+err_vec = zeros(K, 1)
+for i = 1:m,
+  for j = 1:K,
+    err_vec(j) = sum((X(i, :) - centroids(j, :)).^2);
+    endfor;
+    [val idx(i)] = min(err_vec,[],1);
+endfor;
 
 
 
