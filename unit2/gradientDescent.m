@@ -18,15 +18,9 @@ for iter = 1:num_iters
     %
  	hypo = X * theta;
 	de = X'* (hypo -y);
-	disp('======');
 	gradient = (alpha / m) .* de; 
 	theta = theta - gradient; 
-	disp(theta);
 	
-		
-
-
-
 
 
 

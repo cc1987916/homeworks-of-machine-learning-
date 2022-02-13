@@ -21,8 +21,8 @@ for iter = 1:num_iters,
 	Error = hypo - y;
 	de = X' * Error;
 	theta = theta - (alpha / m) .* de;
-	disp(theta);
-	disp('======');
+
+
 	
 	
 
