@@ -1,6 +1,6 @@
 function out = mapFeature(X1, X2)
 % MAPFEATURE Feature mapping function to polynomial features
-%
+% 就是将两个特征x1与x2进行增加多项式次数，组建新的特征，比如组建X1*X2的新特征,
 %   MAPFEATURE(X1, X2) maps the two input features
 %   to quadratic features used in the regularization exercise.
 %
@@ -8,7 +8,7 @@ function out = mapFeature(X1, X2)
 %   X1, X2, X1.^2, X2.^2, X1*X2, X1*X2.^2, etc..
 %
 %   Inputs X1, X2 must be the same size
-%
+%   degree为6表示最高此项为6次，两两组合有多少了，7+6+5+4+3+2+1，
 
 degree = 6;
 out = ones(size(X1(:,1)));
